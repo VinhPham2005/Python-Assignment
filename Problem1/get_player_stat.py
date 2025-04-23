@@ -196,5 +196,4 @@ df_all = df_all.replace('', np.nan).fillna('N/a')
 df_all = df_all.reset_index(drop= True).drop(columns= 'First_name', errors= 'ignore')
 
 df_all.to_csv('Problem1/results.csv', index= True)
-
 driver.quit()

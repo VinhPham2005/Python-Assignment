@@ -2,7 +2,7 @@ import pandas as pd
 
 df = pd.read_csv('Problem1/results.csv', na_values='N/a')
 df = df.apply(pd.to_numeric, errors='ignore')
-df.fillna(0, inplace= True)
+df.fillna(0, inplace=True)
 
 median_df = df.groupby('Team', as_index= False).median(numeric_only= True)
 mean_df = df.groupby('Team', as_index= False).mean(numeric_only= True)

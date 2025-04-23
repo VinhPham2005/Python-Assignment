@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 
 df = pd.read_csv('Problem4/player_values.csv', na_values= 'N/a')
-df.fillna(0, inplace= True)
+df.fillna(0, inplace=True)
 
 df['Values'] = df['Values'].str.replace('€', '').str.replace('M', '').astype(float)
 df['Pos'] = df['Pos'].str.split(',').str[0]
