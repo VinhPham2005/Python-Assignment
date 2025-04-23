@@ -25,8 +25,8 @@ def get_static(target_static, target_rows):
     return df_target
 
 options = Options()
-# options.add_argument('--headless')  
-# options.add_argument('--disable-gpu')  
+options.add_argument('--headless')  
+options.add_argument('--disable-gpu')  
 options.add_argument('--log-level=3')  
 options.add_argument("--disable-logging")
 options.add_argument('--blink-settings=imagesEnabled=false')
@@ -74,7 +74,7 @@ for row in rows:
 
 df = pd.DataFrame(data)
 df['First_name'] = df['Player'].apply(lambda x: x.split()[0])
-df = df.sort_values('First_name')
+df = df.sort_values(by= ['First_name', 'Player'])
 players= set(df['Player'])
 
 gk_static = {
@@ -192,10 +192,9 @@ for table, target_static, url in targets:
     dataframes.append(df_target)
 
 df_all = reduce(lambda left, right: left.merge(right, on=['Player', 'Team'], how='left'), dataframes)
-# df_all.columns = [col.replace('_x', '').replace('_y', '') for col in df_all.columns]
 df_all = df_all.replace('', np.nan).fillna('N/a')
 df_all = df_all.reset_index(drop= True).drop(columns= 'First_name', errors= 'ignore')
 
-df_all.to_csv('results.csv', index= True)
+df_all.to_csv('Problem1/results.csv', index= True)
 
 driver.quit()

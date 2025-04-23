@@ -1,5 +1,5 @@
-import pandas as pd
 import unidecode
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
@@ -51,18 +51,17 @@ for k in range(1, 23):
     player_df = pd.DataFrame(players)
     df = pd.concat([df, player_df], ignore_index= True)
 
-all_pl = pd.read_csv('Problem1/results.csv', na_values= 'N/a')
-all_pl['Min'] = all_pl['Min'].str.replace(',','').astype(float)
-all_pl = all_pl[all_pl['Min'] > 900] 
-all_pl = all_pl[['Player', 'Min']]
+all_pl = pd.read_csv('Problem1/results.csv')
 
 df['Name'] = df['Player'].apply(clean_name)
 all_pl['Name'] = all_pl['Player'].apply(clean_name)
-final_df = pd.merge(df, all_pl, on= 'Name', how= 'left')
-final_df.dropna(inplace= True)
-final_df.reset_index(drop= True, inplace= True)
-final_df.drop(columns=['Name', 'Player_y'], inplace= True)
-final_df.rename(columns= {'Player_x': 'Player'}, inplace= True)
-final_df.to_csv('Problem4/transfer_values.csv')
 
-driver.quit()
+df_all = pd.merge(df, all_pl, on= 'Name', how= 'inner')
+df_all['Min'] = df_all['Min'].str.replace(',', '').astype(float)
+df_all = df_all[df_all['Min'] > 900]
+df_all.dropna(inplace= True)
+drop_cols = ['Unnamed: 0', 'Name', 'Player_y']
+df_all.drop(columns= drop_cols, inplace= True)
+df_all.rename(columns= {'Player_x': 'Player'}, inplace= True)
+df_all.reset_index(drop= True, inplace= True)
+df_all.to_csv('Problem4/player_values.csv')

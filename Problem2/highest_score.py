@@ -18,12 +18,19 @@ team_count = []
 
 for static in statics:
     tmp = {}
-    for team, team_df in teams_dict.items():
-        max_value = team_df[static].mean()
-        tmp[max_value] = team
-    maxx = max(tmp.keys())
-    team_count.append(tmp[maxx])
-    print(f'Highest score for statics {static} is {tmp[maxx]}: {maxx}')
+    if static == 'CrdY' or static == 'CrdR':
+        for team, team_df in teams_dict.items():
+            min_value = team_df[static].sum()
+            tmp[min_value] = team
+        minn = min(tmp.keys())
+        print(f'Highest score for statics {static} is {tmp[minn]}: {minn}')
+    else:
+        for team, team_df in teams_dict.items():
+            max_value = team_df[static].mean()
+            tmp[max_value] = team
+        maxx = max(tmp.keys())
+        team_count.append(tmp[maxx])
+        print(f'Highest score for statics {static} is {tmp[maxx]}: {maxx}')
 
 team_count = Counter(team_count)
 best_team = team_count.most_common(1)[0]
