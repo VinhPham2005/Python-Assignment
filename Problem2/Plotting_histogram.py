@@ -7,7 +7,7 @@ df.fillna(0, inplace=True)
 df.drop(columns='Unnamed: 0', inplace= True)
 df['Age'] = df['Age'].apply(lambda x: int(str(x).split('-')[0]))
 
-statics = df.select_dtypes(include=['number']).columns
+statics = ['Gls', 'xG', 'SCA90', 'Tkl', 'Int', 'Blocks']
 for static in statics:
     df[static] = pd.to_numeric(df[static].astype(str).replace(',', '', regex= True), errors= 'coerce')
 
