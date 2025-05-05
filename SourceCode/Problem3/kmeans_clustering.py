@@ -28,7 +28,7 @@ labels = kmeans.fit_predict(df_pca)
 
 plt.figure(figsize=(8, 6))
 plt.scatter(df_pca[:, 0],df_pca[:, 1], c= labels, cmap= 'viridis')
-plt.title('PCA to 2')
+plt.title('PCA for EPL 2024 - 2025 season data')
 plt.savefig('Problem3/PCA.png')
 
 
