@@ -6,11 +6,13 @@
 \usepackage{titlesec}
 \usepackage{tikz}
 \usepackage{enumitem}
-\usepackage{hyperref}
 \usepackage{fancyvrb}
+\usepackage{tocloft}
+\usepackage[hidelinks]{hyperref}
+\usepackage{etoolbox}
+\usepackage{float}
 
 \geometry{a4paper, margin=1in}
-
 \pagestyle{plain}
 
 \begin{document}
@@ -27,7 +29,7 @@
     {\small UNIT: INFORMATION TECHNOLOGY} \\
     \vspace{0.5cm}
     
-    \includegraphics[width=0.4\textwidth]{images.png} \\
+    \includegraphics[width=0.4\textwidth]{logo.png} \\
     \vspace{0.5cm}
     
     {\Large \textbf{ASSIGNMENT REPORT}} \\
@@ -43,16 +45,37 @@
     \end{tabular}
     \end{center}
 \end{center}
-
 \newpage
-\section*{I. Requirement}
+
+\renewcommand{\figurename}{Image}
+
+\renewcommand{\contentsname}{Contents}
+
+\setlength{\cftbeforesecskip}{12pt}       
+\setlength{\cftbeforesubsecskip}{8pt}     
+
+\setlength{\cftbeforesecskip}{20pt}
+\setlength{\cftbeforesubsecskip}{12pt}
+
+{\large
+\tableofcontents
+}
+\newpage
+
+\section*{I. Requirements}
+\phantomsection
+\addcontentsline{toc}{section}{I. Requirements}
 \begin{itemize}[label= {-}, leftmargin= 1cm]
     \subsection*{Problem 1}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{Problem 1}
         \begin{itemize}[label= {-},  leftmargin= 2cm]
             \item Collect data of player who have played more than 90 minutes in the 2024 - 2025 English Premier League season.
         \end{itemize}
 
     \subsection*{Problem 2}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{Problem 2}
         \begin{itemize}[label= {-}, leftmargin= 2cm]
             \item Identify the top 3 best and worst players for each statistic.
             \item  Find the median, mean, and standard deviation for each team.
@@ -60,12 +83,16 @@
         \end{itemize}
 
     \subsection*{Problem 3}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{Problem 3}
         \begin{itemize}[label= {-}, leftmargin= 2cm]
             \item Use the K-means algorithm to classify the player.
             \item Use PCA to reduce the data dimensions to 2 and plot a 2D cluster.
         \end{itemize}
 
     \subsection*{Problem 4}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{Problem 4}
         \begin{itemize}[label= {-}, leftmargin= 2cm]
             \item Collect player transfer values who have played more than 900 minutes in the 2024 - 2025 EPL season.
             \item Propose a method for estimating player values and how to select features and models.
@@ -91,8 +118,12 @@ From above requirements, I can see that we need to collect player's data and ana
 
 \newpage
 \section*{II. Solutions}
+\phantomsection
+\addcontentsline{toc}{section}{II. Solutions}
 \begin{itemize}[label= {*}, leftmargin= 1cm]
     \subsection*{1) Problem 1}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{1) Problem 1}
     \item {\Large Idea:}
     \begin{itemize}[label= {-}, leftmargin= 1cm]
         \item Use selenium and webdriver to crawl data from web
@@ -167,6 +198,8 @@ From above requirements, I can see that we need to collect player's data and ana
     \newpage
 
     \subsection*{2) Problem 2}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{2) Problem 2}
     \item {\Large Idea:}
     \begin{itemize}[label= {-}, leftmargin= 1cm]
         \item Reuse the data is collected in the Problem 1 
@@ -227,8 +260,15 @@ From above requirements, I can see that we need to collect player's data and ana
         A list of unique teams is created from the 'Team' column. Then, a dictionary (teams\_dict) is generated, where each team is associated with its corresponding subset of the DataFrame.
 
         For plotting and saving histograms, I created subplots in a 3x7 grid for each statistic. The first plot shows the overall Premier League distribution, while the remaining plots display each team's distribution. Each histogram is saved as a .png file in the Problem2/Data directory, with filenames corresponding to the statistic (e.g., Gls.png), making it easy to compare distributions across teams and the league.
-        \vspace{0.8cm}
+        \vspace{0.3cm}
         
+        Here is the example:
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.7\linewidth]{Gls.png}
+            \caption{Goals plotting}
+        \end{figure}
+        \newpage        
         
         \item d) Identify the team with the highest score
         \vspace{0.5cm}
@@ -256,10 +296,16 @@ From above requirements, I can see that we need to collect player's data and ana
         \end{itemize}
         For each statistic, the team with the highest value (or lowest for card statistics) is identified, and the result is printed for clarity.
         \vspace{0.3cm}
-        
+
+        \newpage
         \textbf{Determining the Best Team}\\
         Finally, I uses the \texttt{Counter} class to count how many times each team had the highest score across all statistics. The team with the most highest scores is considered the best performing team of the 2024-2025 Premier League season. The script then prints the name of this team along with the number of statistics in which they had the highest score.
-        
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.7\linewidth]{highest_score.png}
+            \caption{Team with hight score}
+        \end{figure}
         
     \end{itemize}
     \item {\Large Conclusion:}
@@ -271,6 +317,8 @@ From above requirements, I can see that we need to collect player's data and ana
     \newpage
 
     \subsection*{3) Problem 3}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{3) Problem 3}
     \item {\Large Idea:}
     \begin{itemize}[label= {-}, leftmargin= 1cm]
         \item Use elbow and silhouette method to find k clustes.
@@ -309,6 +357,13 @@ From above requirements, I can see that we need to collect player's data and ana
         \vspace{0.3cm}
 
         I visualized this method to a plot to provides a clear way to identify the elbow point by looking for a change in the slope of the curve - where the curve begin to flatten significantly.
+        
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.7\linewidth]{elbow_method.png}
+            \caption{Elbow method}
+        \end{figure}
+        
         \vspace{0.5cm}
 
         \textbf{Silhouette Score Method}
@@ -327,9 +382,13 @@ From above requirements, I can see that we need to collect player's data and ana
         \vspace{0.3cm}
         
         I also visualized it and peaks in the silhouette score curve are particularly informative, as they point to the number of clusters that best balance intra-cluster tightness and inter-cluster separation. Unlike the Elbow Method, the Silhouette Score offers a quantitative measure of clustering performance and can provide stronger justification for selecting a particular \textbf{\textit{k}}.
-        \vspace{0.3cm}
 
-        I visualized this method to a plot to provides a clear way to identify the elbow point by looking for a change in the slope of the curve - where the curve begin to flatten significantly.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.7\linewidth]{silhouette_method.png}
+            \caption{Silhouette score method}
+        \end{figure}
+        
         \vspace{0.5cm}
 
         Upon evaluating the WCSS curve generated by the Elbow Method, it appears that the rate of decrease in WCSS begins to level off significantly around \textbf{\textit{k} = 3} or \textbf{\textit{k} = 4} suggesting that this range captures the underlying structure of the data well without unnecessary complexity. While the WCSS continues to decline beyond these values, the marginal improvement is minimal, indicating diminishing returns for higher cluster counts.
@@ -378,6 +437,14 @@ From above requirements, I can see that we need to collect player's data and ana
         \vspace{0.3cm}
 
         To interpret and present the clustering results, a scatter plot was generated, in which each point represents a player in the two-dimensional PCA space. The color of each point corresponds to its assigned cluster, providing a visual summary of the separation and cohesion between groups. 
+        \newpage
+        
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.7\linewidth]{PCA.png}
+            \caption{Use PCA to reduce the data dimension to 2}
+        \end{figure}
+        
         \vspace{0.3cm}
         
     \end{itemize}
@@ -389,6 +456,8 @@ From above requirements, I can see that we need to collect player's data and ana
     \newpage
 
     \subsection*{4) Problem 4}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{4) Problem 4}
     \item {\Large Idea:}
     \begin{itemize}[label= {-}, leftmargin= 1cm]
         \item Use selenium and webdriver to crawl data from web
