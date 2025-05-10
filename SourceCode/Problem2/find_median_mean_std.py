@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('Problem1/results.csv', na_values='N/a')
+df = pd.read_csv('SourceCode/Problem1/results.csv', na_values='N/a')
 df = df.apply(pd.to_numeric, errors='ignore')
 df.fillna(0, inplace=True)
 
@@ -24,4 +24,4 @@ for col in median_df.columns:
 combined_df = pd.concat(combined_dict.values(), axis= 1)
 combined_df.columns = combined_dict.keys()
 
-combined_df.to_csv('Problem2/results2.csv', index= True)
+combined_df.to_csv('SourceCode/Problem2/results2.csv', index= True)
