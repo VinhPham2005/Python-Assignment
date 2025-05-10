@@ -51,7 +51,7 @@ for k in range(1, 23):
     player_df = pd.DataFrame(players)
     df = pd.concat([df, player_df], ignore_index= True)
 
-all_pl = pd.read_csv('Problem1/results.csv')
+all_pl = pd.read_csv('SourceCode/Problem1/results.csv')
 
 df['Name'] = df['Player'].apply(clean_name)
 all_pl['Name'] = all_pl['Player'].apply(clean_name)
@@ -64,4 +64,4 @@ drop_cols = ['Unnamed: 0', 'Name', 'Player_y']
 df_all.drop(columns= drop_cols, inplace= True)
 df_all.rename(columns= {'Player_x': 'Player'}, inplace= True)
 df_all.reset_index(drop= True, inplace= True)
-df_all.to_csv('Problem4/player_values.csv')
+df_all.to_csv('SourceCode/Problem4/player_values.csv')
