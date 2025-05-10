@@ -1,7 +1,7 @@
 import pandas as pd
 from collections import Counter
 
-df = pd.read_csv('Problem1/results.csv', na_values='N/a')
+df = pd.read_csv('SourceCode/Problem1/results.csv', na_values='N/a')
 df.fillna(0, inplace= True)
 df.drop(columns='Unnamed: 0', inplace= True)
 df['Age'] = df['Age'].apply(lambda x: int(str(x).split('-')[0]))
