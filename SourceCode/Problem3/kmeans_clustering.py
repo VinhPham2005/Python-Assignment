@@ -4,7 +4,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-df = pd.read_csv('Problem1/results.csv', na_values= 'N/a')
+df = pd.read_csv('SourceCode/Problem1/results.csv', na_values= 'N/a')
 drop_cols = ['Unnamed: 0', 'Player', 'Nation', 'Team', 'Pos', 'Age']
 df.drop(columns=drop_cols, inplace= True)
 
@@ -29,7 +29,7 @@ labels = kmeans.fit_predict(df_pca)
 plt.figure(figsize=(8, 6))
 plt.scatter(df_pca[:, 0],df_pca[:, 1], c= labels, cmap= 'viridis')
 plt.title('PCA for EPL 2024 - 2025 season data')
-plt.savefig('Problem3/PCA.png')
+plt.savefig('SourceCode/Problem3/PCA.png')
 
 
 
