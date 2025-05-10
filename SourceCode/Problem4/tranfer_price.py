@@ -51,7 +51,7 @@ for k in range(1, 23):
     player_df = pd.DataFrame(players)
     df = pd.concat([df, player_df], ignore_index= True)
 
-all_pl = pd.read_csv('Problem1/results.csv', na_values= 'N/a')  
+all_pl = pd.read_csv('SourceCode/Problem1/results.csv', na_values= 'N/a')  
 all_pl['Min'] = all_pl['Min'].str.replace(',','').astype(float)
 all_pl = all_pl[all_pl['Min'] > 900] 
 all_pl = all_pl[['Player', 'Min']]
