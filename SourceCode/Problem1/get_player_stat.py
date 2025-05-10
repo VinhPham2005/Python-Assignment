@@ -195,5 +195,5 @@ df_all = reduce(lambda left, right: left.merge(right, on=['Player', 'Team'], how
 df_all = df_all.replace('', np.nan).fillna('N/a')
 df_all = df_all.reset_index(drop= True).drop(columns= 'First_name', errors= 'ignore')
 
-df_all.to_csv('Problem1/results.csv', index= True)
+df_all.to_csv('SourceCode/Problem1/results.csv', index= True)
 driver.quit()
