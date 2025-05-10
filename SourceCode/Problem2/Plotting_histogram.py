@@ -2,7 +2,7 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df = pd.read_csv('Problem1/results.csv', na_values= 'N/a')
+df = pd.read_csv('SourceCode/Problem1/results.csv', na_values= 'N/a')
 df.fillna(0, inplace=True)
 
 statistics = ['Gls', 'xG', 'SCA90', 'Tkl', 'Int', 'Blocks']
@@ -25,7 +25,7 @@ for statistic in statistics:
     statistic = statistic.replace('/','')
     file_name = f'{statistic}.png'
     plt.tight_layout()
-    if not os.path.exists('Problem2/Data'):
-        os.mkdir('Problem2/Data')
-    plt.savefig('Problem2/Data/{}'.format(file_name))
+    if not os.path.exists('SourceCode/Problem2/Data'):
+        os.mkdir('SourceCode/Problem2/Data')
+    plt.savefig('SourceCode/Problem2/Data/{}'.format(file_name))
     plt.close()
